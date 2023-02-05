@@ -2,9 +2,9 @@ from apps.users.api.v1.serializers import CustomAuthTokenSerializer, UserCreateS
 from django.contrib.auth import get_user_model
 from rest_framework import permissions, status
 from rest_framework.authtoken.models import Token
+from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.generics import CreateAPIView
 from rest_framework.response import Response
-from rest_framework.views import APIView
 
 UserModel = get_user_model()
 
@@ -30,15 +30,17 @@ class UserCreateAPIView(CreateAPIView):
         return Response({"token": token.key}, status=status.HTTP_201_CREATED)
 
 
-class CustomAuthTokenAPIView(APIView):
+class CustomAuthTokenAPIView(ObtainAuthToken):
     """View for obtaining an auth token."""
+
+    serializer_class = CustomAuthTokenSerializer
 
     def post(self, request, *args, **kwargs):
         """
         Create a token for a user. Return a token if it already exists.
         """
 
-        serializer = CustomAuthTokenSerializer(data=request.data)
+        serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data.get("user")
         token, created = Token.objects.get_or_create(user=user)

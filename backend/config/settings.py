@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     # Installed apps
     "rest_framework",
     "rest_framework.authtoken",
+    "drf_yasg",
     # Custom apps
     "apps.users",
 ]
@@ -122,3 +123,16 @@ REST_FRAMEWORK = {
     "DEFAULT_RENDERER_CLASSES": ("rest_framework.renderers.JSONRenderer",),
     "DEFAULT_AUTHENTICATION_CLASSES": ("rest_framework.authentication.TokenAuthentication",),
 }
+
+# SWAGGER
+if DEBUG:
+    SWAGGER_SETTINGS = {
+        "exclude_namespaces": [],
+        "USE_SESSION_AUTH": False,
+        "PERSIST_AUTH": True,
+        "SECURITY_DEFINITIONS": {
+            "Token": {"type": "apiKey", "name": "Authorization", "in": "header"}
+        },
+        "SUPPORTED_SUBMIT_METHODS": ["get", "put", "post", "delete", "patch"],
+        "SHOW_REQUEST_HEADERS": True,
+    }
