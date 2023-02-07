@@ -5,5 +5,6 @@ from django.urls import include, path
 urlpatterns = [
     swagger_pattern,
     path("admin/", admin.site.urls),
-    path("api/v1/users/", include("apps.users.api.v1.routes")),
+    path("api/v1/users/", include("apps.users.api.v1.routes", namespace="users")),
+    path("api/v1/events/", include("apps.events.api.v1.routes", namespace="events")),
 ]

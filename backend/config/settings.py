@@ -2,7 +2,6 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
-print(f"{BASE_DIR=}")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -32,6 +31,7 @@ INSTALLED_APPS = [
     "drf_yasg",
     # Custom apps
     "apps.users",
+    "apps.events",
 ]
 
 MIDDLEWARE = [
@@ -100,12 +100,16 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Europe/Kyiv"
 
 USE_I18N = True
 
 USE_TZ = True
 
+USE_L10N = False
+
+DATETIME_FORMAT = "d/m/Y H:i:s"
+DATETIME_INPUT_FORMATS = ["%d/%m/%Y %H:%M:%S"]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
@@ -122,6 +126,10 @@ AUTH_USER_MODEL = "users.User"
 REST_FRAMEWORK = {
     "DEFAULT_RENDERER_CLASSES": ("rest_framework.renderers.JSONRenderer",),
     "DEFAULT_AUTHENTICATION_CLASSES": ("rest_framework.authentication.TokenAuthentication",),
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 10,
+    "DATETIME_FORMAT": "%d/%m/%Y %H:%M:%S",
+    "DATETIME_INPUT_FORMATS": ["%d/%m/%Y %H:%M:%S"],
 }
 
 # SWAGGER

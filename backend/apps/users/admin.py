@@ -11,10 +11,11 @@ TokenAdmin.raw_id_fields = ["user"]
 
 @admin.register(UserModel)
 class UserAdmin(BaseUserAdmin):
-    """A class to represent the user at admin panel."""
+    """A class to register User model at admin panel."""
 
     list_display = ("id", "email", "date_joined", "last_login", "is_staff")
     list_display_links = ("id", "email")
+    list_per_page = 25
     search_fields = ("email",)
     readonly_fields = ("date_joined", "last_login", "is_staff")
     ordering = ("id",)
