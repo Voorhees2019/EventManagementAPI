@@ -130,6 +130,7 @@ REST_FRAMEWORK = {
     "PAGE_SIZE": 10,
     "DATETIME_FORMAT": "%d/%m/%Y %H:%M:%S",
     "DATETIME_INPUT_FORMATS": ["%d/%m/%Y %H:%M:%S"],
+    "TEST_REQUEST_DEFAULT_FORMAT": "json",
 }
 
 # SWAGGER
