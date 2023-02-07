@@ -25,6 +25,11 @@ class ListCreateEventAPIView(generics.ListCreateAPIView):
     def get_queryset(self):
         return Event.objects.all()
 
+    def get(self, request, *args, **kwargs):
+        """Get a list of events."""
+
+        return super().get(request, *args, **kwargs)
+
     def post(self, request, *args, **kwargs):
         """Create a new event with the provided data."""
 
